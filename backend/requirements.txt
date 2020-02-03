@@ -1,2 +1,7 @@
 fastapi
 uvicorn
+pydantic
+sqlalchemy
+email-validator
+async-exit-stack
+async-generator
