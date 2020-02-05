@@ -14,9 +14,9 @@ def create_form(db: Session, form: schemas.FormCreate):
     fake_hashed_password = form.password + "notreallyhashed"
     db_form = models.Form(hashed_password=fake_hashed_password)
     db.add(db_form)
-    for feature in form.features:
-        db_form.features.append(
-            models.Feature(text=feature.text, upvotes=0, downvotes=0))
+    for item in form.items:
+        db_form.items.append(
+            models.Item(text=item.text))
     db.commit()
     db.refresh(db_form)
     return db_form

@@ -2,21 +2,14 @@ from typing import List
 
 from pydantic import BaseModel
 
-class FeatureBase(BaseModel):
+class ItemBase(BaseModel):
     text: str
 
-class FeatureCreate(FeatureBase):
+class ItemCreate(ItemBase):
     pass
 
-class FeatureVote(FeatureBase):
+class Item(ItemBase):
     id: int
-    upvotes: int
-    downvotes: int
-
-class Feature(FeatureBase):
-    id: int
-    upvotes: int
-    downvotes: int
     form_id: int
 
     class Config:
@@ -28,11 +21,11 @@ class FormBase(BaseModel):
 
 class FormCreate(FormBase):
     password: str
-    features: List[FeatureCreate] = []
+    items: List[ItemCreate] = []
 
 class Form(FormBase):
     id: int
-    features: List[Feature] = []
+    items: List[Item] = []
 
     class Config:
         orm_mode = True

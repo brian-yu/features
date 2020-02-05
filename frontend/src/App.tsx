@@ -18,7 +18,7 @@ const App = () => {
       <Router>
         <nav className="navbar" role="navigation" aria-label="main navigation">
           <div className="navbar-brand">
-            <Link className="navbar-item" to="/">Features</Link>
+            <Link className="navbar-item" to="/">Itemz</Link>
           </div>
           <div id="navbarBasicExample" className="navbar-menu">
             <div className="navbar-start">

@@ -8,6 +8,7 @@ services:
         command: "/start-reload.sh"
         ports:
             - "8001:80"
+        restart: always
     
     frontend:
         build: ./frontend
