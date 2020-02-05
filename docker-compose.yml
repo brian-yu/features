@@ -1,0 +1,20 @@
+version: '3.7'
+services:
+    backend:
+        build: ./backend
+        container_name: backend
+        volumes:
+            - ./backend:/app
+        ports:
+            - "8001:80"
+    
+    frontend:
+        build: ./frontend
+        working_dir: /home/node/app
+        environment:
+            - NODE_ENV=production
+        volumes:
+            - ./frontend:/home/node/app
+        ports:
+            - "8000:3000"
+        command: bash -c "yarn && yarn start"
