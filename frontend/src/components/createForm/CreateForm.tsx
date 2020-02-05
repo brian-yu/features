@@ -1,9 +1,9 @@
 import React, {
     useState, useReducer, ChangeEvent, KeyboardEvent, createRef
 } from 'react';
-import {
-  Redirect
-} from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
+import { API_HOST } from '../../constants';
 
 const FeatureFormList = ({features, setFeatures}: any) => {
 
@@ -49,7 +49,7 @@ const FeatureFormList = ({features, setFeatures}: any) => {
             .map((feature: any) => { return {text: feature.text} })
       };
     console.log(formData);
-    fetch('/forms', {
+    fetch(`${API_HOST}/forms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
