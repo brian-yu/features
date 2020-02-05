@@ -13,14 +13,16 @@ const FeatureFormList = ({features, setFeatures}: any) => {
 
   const handleInput = (idx: number, e: ChangeEvent<HTMLInputElement>) => {
       const text = e.target.value;
+
+      // Modify field.
+      setFeatures({type: 'setText', index: idx, value: text});
+
       // Remove if empty.
       if (text === '') {
           if (idx > 0) {
               setFeatures({type: 'remove', index: idx});
           }
       } else {
-          // Modify field.
-          setFeatures({type: 'setText', index: idx, value: text});
           // Add new field if modifying last.
           if (idx === features.length - 1) {
             setFeatures({type: 'add'});
@@ -30,11 +32,13 @@ const FeatureFormList = ({features, setFeatures}: any) => {
 
   const handleKeyPress = (idx: number, e: KeyboardEvent) => {
       // Focus on next field on input.
+
       if (e.key === "Enter") {
           if (features[idx+1]) {
               features[idx+1].ref.current.focus();    
           }
       }
+
   }
 
   const submitForm = () => {
@@ -45,7 +49,7 @@ const FeatureFormList = ({features, setFeatures}: any) => {
             .map((feature: any) => { return {text: feature.text} })
       };
     console.log(formData);
-    fetch('http://localhost:8000/forms', {
+    fetch('/forms', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
