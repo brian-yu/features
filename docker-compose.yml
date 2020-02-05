@@ -5,6 +5,7 @@ services:
         container_name: backend
         volumes:
             - ./backend:/app
+        command: "/start-reload.sh"
         ports:
             - "8001:80"
     
