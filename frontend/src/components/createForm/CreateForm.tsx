@@ -39,7 +39,7 @@ const ItemFormList = ({ items, setItems }: any) => {
                 break;
             // Focus on previous field on backspace if current field is empty.
             case 'Backspace':
-                if (items[idx - 1] && items[idx].text == "") {
+                if (items[idx - 1] && items[idx].text === "") {
                     console.log(items[idx-1]);
                     items[idx - 1].ref.current.focus();
                     e.preventDefault();
@@ -68,20 +68,20 @@ const ItemFormList = ({ items, setItems }: any) => {
             items: items.filter((item: any) => item.text !== '')
                 .map((item: any) => { return { text: item.text } })
         };
-        console.log(formData);
+
+
         fetch(`${API_HOST}/forms`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
             },
             body: JSON.stringify(formData),
         })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
-                setSubmittedForm(data);
-            })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+            setSubmittedForm(data);
+        })
     }
 
     if (submittedForm !== null) {
@@ -133,7 +133,7 @@ const ItemFormList = ({ items, setItems }: any) => {
                             <div className="control">
                                 <button className="button is-primary" onClick={() => submitForm()}>
                                     Submit
-                </button>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -151,7 +151,11 @@ const CreateForm = () => {
             case "remove":
                 return items.filter((_, index) => index !== action.index);
             case "setText":
-                return items.map((oldVal, index) => index === action.index ? { text: action.value, ref: oldVal.ref } : oldVal)
+                // return items.map((oldVal, index) => index === action.index ? { text: action.value, ref: oldVal.ref } : oldVal)
+                const newItems = items.slice();
+                newItems[action.index] = Object.assign(
+                    {}, items[action.index], { text: action.value });
+                return newItems;
             default:
                 return items;
         }

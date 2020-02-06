@@ -1,3 +1,5 @@
+import secrets
+
 from sqlalchemy.orm import Session
 
 import models, schemas
@@ -6,11 +8,11 @@ import models, schemas
 def get_form(db: Session, form_id: int):
     return db.query(models.Form).filter(models.Form.id == form_id).first()
 
-
 def get_forms(db: Session, skip: int = 0, limit: int = 100):
     return db.query(models.Form).offset(skip).limit(limit).all()
 
 def create_form(db: Session, form: schemas.FormCreate):
+    # TODO: Actually hash password.
     fake_hashed_password = form.password + "notreallyhashed"
     db_form = models.Form(hashed_password=fake_hashed_password)
     db.add(db_form)

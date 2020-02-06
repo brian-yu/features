@@ -1,0 +1,32 @@
+.vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*justify-content: center;*/
+    position: relative;
+}
+
+.vote-card {
+    position: absolute;
+}
+
+.dummy {
+    position: absolute;
+    pointer-events: none;
+}
+
+.vote-card-container {
+    position: relative;
+}
+
+.card-content {
+    min-height: 30vh;
+    min-width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.glare-wrapper {
+    pointer-events: none;
+}

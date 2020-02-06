@@ -1,16 +1,18 @@
 import React from 'react';
+
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useParams
+  Link
 } from "react-router-dom";
-import logo from './logo.svg';
-import './App.css';
-import Form from './components/form/Form'
-import CreateForm from './components/createForm/CreateForm'
 import 'bulma/css/bulma.min.css';
+
+import Form from './components/form/Form';
+import CreateForm from './components/createForm/CreateForm';
+import Vote from './components/vote/Vote';
+
+import './App.css';
 
 const App = () => {
   return (
@@ -30,6 +32,9 @@ const App = () => {
           <Switch>
             <Route path="/new">
               <CreateForm />
+            </Route>
+            <Route path="/form/:id/vote">
+              <Vote />
             </Route>
             <Route path="/form/:id">
               <Form />
