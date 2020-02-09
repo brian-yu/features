@@ -54,3 +54,7 @@ def read_forms(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 def read_form(form_id: int, db: Session = Depends(get_db)):
     form = crud.get_form(db, form_id)
     return form
+
+@app.post("/vote", response_model=schemas.Vote)
+def create_vote(vote: schemas.VoteCreate, db: Session = Depends(get_db)):
+    return crud.create_vote(db=db, vote=vote)

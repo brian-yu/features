@@ -1,4 +1,6 @@
 from typing import List
+from datetime import datetime
+from models import VoteType
 
 from pydantic import BaseModel
 
@@ -26,6 +28,23 @@ class FormCreate(FormBase):
 class Form(FormBase):
     id: int
     items: List[Item] = []
+
+    class Config:
+        orm_mode = True
+
+class VoteBase(BaseModel):
+    item_id: int
+    ip: str # Use pydantic ipaddress.IPv4Address?
+    vote_type: VoteType
+    pass
+
+class VoteCreate(VoteBase):
+    pass
+
+class Vote(VoteBase):
+    id: int
+    item: Item = None
+    timestamp: datetime = None
 
     class Config:
         orm_mode = True

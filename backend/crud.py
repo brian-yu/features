@@ -32,3 +32,14 @@ def create_form(db: Session, form: schemas.FormCreate):
 #     db.commit()
 #     db.refresh(db_feature)
 #     return db_feature
+
+def get_votes(db: Session, item_id: int):
+    return db.query(models.Votes).filter(models.Vote.item_id == item_id).all()
+
+def create_vote(db: Session, vote: schemas.VoteCreate):
+    db_vote = models.Vote(**vote.dict())
+    db_vote.item = db.query(models.Item).filter(models.Item.id == vote.item_id).first()
+    db.add(db_vote)
+    db.commit()
+    db.refresh(db_vote)
+    return db_vote
